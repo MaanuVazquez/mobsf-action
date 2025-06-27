@@ -1,6 +1,6 @@
-FROM opensecurity/mobile-security-framework-mobsf:v3.4.3
+FROM opensecurity/mobile-security-framework-mobsf:latest
 
-LABEL version="1.7.2"
+LABEL version="1.7.3"
 LABEL repository="https://github.com/fundacaocerti/mobsf-action"
 LABEL homepage="https://github.com/fundacaocerti/mobsf-action"
 LABEL maintainer="Ian Koerich Maciel <inm@certi.org.br>"
