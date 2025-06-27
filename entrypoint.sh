@@ -26,15 +26,15 @@ export MOBSF_API_KEY="$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 64)"
 export MOBSF_URL="localhost:8000"
 
 cd /home/mobsf/Mobile-Security-Framework-MobSF
-python3 manage.py makemigrations 2&>> manage.out && \
-python3 manage.py makemigrations StaticAnalyzer 2&>> manage.out && \
-python3 manage.py migrate 2&>> manage.out
+python3 manage.py makemigrations && \
+python3 manage.py makemigrations StaticAnalyzer && \
+python3 manage.py migrate
 set +e
-python3 manage.py createsuperuser --noinput --email "" 2&>> manage.out
+python3 manage.py createsuperuser --noinput --email ""
 set -e
-python3 manage.py create_roles 2&>> manage.out
+python3 manage.py create_roles
 gunicorn -b 127.0.0.1:8000 "mobsf.MobSF.wsgi:application" --workers=1 --threads=10 --timeout=3600 \
-    --worker-tmp-dir=/dev/shm --log-level=citical --log-file=- --access-logfile=- --error-logfile=- --capture-output &
+    --worker-tmp-dir=/dev/shm &
 
 # Wait to start MobSF
 sleep 10
